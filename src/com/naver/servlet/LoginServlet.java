@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,12 +28,13 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("login ").append(request.getContextPath());
-		request.setAttribute("email", "a@a.com");  // String email = "a@a.com";
-//		response.sendRedirect("login.jsp");
-		RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
-		dis.forward(request, response);
+		String email = request.getParameter("email");
+		String pw = request.getParameter("pw");
+		System.out.println(email);
+		System.out.println(pw);
+		// 디비 연결하고
+		// 이멜과 패스를 확인해서
+		// 있으면 있다 없으면 없다
 	}
 
 	/**

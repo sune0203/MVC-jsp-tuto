@@ -1,6 +1,8 @@
 package com.naver.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,34 +31,29 @@ public class Controller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		StringBuffer url = request.getRequestURL();
 		System.out.println(url);
 		String uri = request.getRequestURI();
 		String [] arrUri = uri.split("/");
 		uri = arrUri[2];
-//		for (int i=0; i< arrUri.length; i++) {
-//			System.out.println(arrUri[i]);
-//		}
 		
+		String site = null;
 		System.out.println("내가 찾고 싶은 문자열: " + arrUri[2]);   // /loginbt/b.nhn
-		if (uri.equals("naver.nhn")) {
-//			response.getWriter().println("naver");
-			response.sendRedirect("https://www.naver.com/");
-		} else if (uri.equals("kakao.nhn")) {
-//			response.getWriter().println("kakao");
-			response.sendRedirect("https://www.daum.net/");
+		if (uri.equals("main.nhn")) {
+			site = "main.jsp";
+		} else if (uri.equals("login.nhn")) {
+			site = "login.jsp";
+		} else if (uri.equals("loginok.nhn")) {
+			site = "LoginServlet";
+		} else if (uri.equals("join.nhn")) {
+			site = "join.jsp";
 		} else {
-			response.getWriter().println("error page");
+			site = "404.jsp";
+			System.out.println("error");
 		}
+		RequestDispatcher dis = request.getRequestDispatcher(site);
+		dis.forward(request, response);
 
-		String addr = request.getRemoteAddr();
-		System.out.println(addr);
-		int port = request.getRemotePort();
-		System.out.println(port);
-//		String host = request
-//		System.out.println(host);
-		response.getWriter().println();
 		
 	}
 
