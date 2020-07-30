@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/join")
+public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public JoinServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("login ").append(request.getContextPath());
-		request.setAttribute("email", "a@a.com");  // String email = "a@a.com";
+//		request.setAttribute("email", "a@a.com");  // String email = "a@a.com";
 //		response.sendRedirect("login.jsp");
 		RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
 		dis.forward(request, response);

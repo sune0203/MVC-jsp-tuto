@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	String email = (String)request.getAttribute("email");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +60,7 @@
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="Email address" type="email">
+        <input name="" class="form-control" placeholder="Email address" type="email" value="<%=email %>">
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
