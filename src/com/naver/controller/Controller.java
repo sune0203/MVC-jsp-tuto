@@ -45,8 +45,14 @@ public class Controller extends HttpServlet {
 			site = "login.jsp";
 		} else if (uri.equals("loginok.nhn")) {
 			site = "LoginServlet";
+		} else if (uri.equals("logout.nhn")) {
+			site = "logout.jsp";
 		} else if (uri.equals("join.nhn")) {
 			site = "join.jsp";
+		} else if (uri.equals("joinok.nhn")) {
+			site = "JoinServlet";
+		} else if (uri.equals("emailck.nhn")) {
+			site = "EmailCkServlet";
 		} else {
 			site = "404.jsp";
 			System.out.println("error");

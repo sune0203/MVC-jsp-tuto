@@ -1,5 +1,10 @@
+<%@page import="com.naver.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+MemberDto dto = (MemberDto)session.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,12 +25,18 @@
   
   <!-- Links -->
   <ul class="navbar-nav">
+<% if (dto == null) { %>
     <li class="nav-item">
       <a class="nav-link" href="login.nhn">로그인</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="join.nhn">회원가입</a>
     </li>
+<% } else { %>
+    <li class="nav-item">
+      <a class="nav-link" href="logout.nhn">로그아웃</a>
+    </li>
+<% } %>
     <li class="nav-item">
       <a class="nav-link" href="search.nhn">검색</a>
     </li>
