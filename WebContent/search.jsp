@@ -19,22 +19,33 @@
                                                                     
 </article>
 </div>
+
+<h3>검색 결과 출력</h3>
+<div id="result"></div>
+
 </div> 
 <script>
 $(document).ready(function(){
   $("#searchBtn").click(function(){
 	var search = $("#search").val();
+	$("#result").html("여기에 찍히나: " + search);
 	console.log(search);
-//     $.post("searchok.nhn",
-//     {
-//     	search: search
-//     },
-//     function(data, status){
-//     	$.each(data, function(i, field){
-// //             $("div").append(field + " ");
-//     		console.log("Data: " + field + "\nindex: " + i);
-//           });
-//     });
+    $.post("searchok.nhn",
+    {
+    	search: search
+    },
+    function(data, status){
+    	var html = "";
+    	console.log(data['total']);
+    	console.log(data.items);
+    	$.each(data.items, function(key, field){
+    		html += "<a href='" + field.link + "' target='_blank'>"
+    		html += field.title + "</a><br>";
+//             $("div").append(field + " ");
+//     		console.log("Data: " + field.title);  // field['title']
+          });
+		$("#result").html(html);
+    });
   });
 });
 </script>
