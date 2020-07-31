@@ -53,6 +53,10 @@ public class Controller extends HttpServlet {
 			site = "JoinServlet";
 		} else if (uri.equals("emailck.nhn")) {
 			site = "EmailCkServlet";
+		} else if (uri.equals("search.nhn")) {
+			site = "search.jsp";
+		} else if (uri.equals("searchok.nhn")) {
+			site = "SearchServlet";
 		} else {
 			site = "404.jsp";
 			System.out.println("error");
