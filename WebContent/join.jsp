@@ -18,19 +18,24 @@
 		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 		 </div>
         <input name="email"  id="email" class="form-control" placeholder="Email address" type="email">
+
     </div> <!-- form-group// -->
+    <div class="form-group input-group">
+       	<div id="email-success">email 사용이 가능합니다.</div>
+    	<div id="email-danger">이미 가입된 Email이 있습니다.</div>
+    </div>
     <div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 		</div>
-		<select name="phone1" class="custom-select" style="max-width: 120px;">
+		<select id="phone1" name="phone1" class="custom-select" style="max-width: 120px;">
 		    <option value="010" selected>010</option>
 		    <option value="011">011</option>
 		    <option value="017">017</option>
 		    <option value="016">016</option>
             <option value="019">019</option>
 		</select>
-    	<input name="phone2" class="form-control" placeholder="Phone number" type="text">
+    	<input id="phone2" name="phone2" class="form-control" placeholder="Phone number" type="text">
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
@@ -86,7 +91,9 @@
             } 
         });
     });
-    
+$(document).ready(function(){    
+    $("#email-success").hide();
+    $("#email-danger").hide();
     $("#email").blur(function(){
         var email = $("#email").val();
         console.log(email + ' 이메일 체크!!');
@@ -96,13 +103,26 @@
         	    },
         	    function(data,status){
         	    	if (data.trim() == "ok") {
-        	    		alert("이메일이 있습니다");	
+        	    		$("#email-danger").hide();
+        	    		$("#email-success").show();
+//         	    		alert("이메일이 있습니다");	
         	    	} else {
-        	    		alert("가입이 가능한 메일입니다.");	
+        	    		 $("#email-success").hide();
+        	    		 $("#email-danger").show();
+//         	    		alert("가입이 가능한 메일입니다.");	
         	    	}
         	      
        	});
     });
+    $("#phone1").blur(function(){
+        $("#email-success").hide();
+        $("#email-danger").hide();
+    });
+    $("#phone2").blur(function(){
+        $("#email-success").hide();
+        $("#email-danger").hide();
+    });
+});
 </script>
 </body>
 </html>
