@@ -103,12 +103,12 @@ $(document).ready(function(){
         	    },
         	    function(data,status){
         	    	if (data.trim() == "ok") {
-        	    		$("#email-danger").hide();
-        	    		$("#email-success").show();
+       	    		 $("#email-success").hide();
+    	    		 $("#email-danger").show();
 //         	    		alert("이메일이 있습니다");	
         	    	} else {
-        	    		 $("#email-success").hide();
-        	    		 $("#email-danger").show();
+         	    		$("#email-danger").hide();
+        	    		$("#email-success").show();
 //         	    		alert("가입이 가능한 메일입니다.");	
         	    	}
         	      

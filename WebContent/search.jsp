@@ -3,6 +3,12 @@
     
 <%@ include file="top.jsp" %>
 
+<% if (dto == null){ %>
+<script> alert("로그인을 하면 이용 가능 합니다.");
+location.href="login.nhn";</script>
+<% }  %>
+
+
 <div class="container">
 <div class="card bg-light">
 <article class="card-body mx-auto" style="max-width: 400px;">

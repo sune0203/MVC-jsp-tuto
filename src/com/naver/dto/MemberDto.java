@@ -6,7 +6,7 @@ public class MemberDto {
 	private String pw;
 	private String name;
 	private String tel;
-	private String regdate;
+	
 	public int getNum() {
 		return num;
 	}
@@ -37,12 +37,6 @@ public class MemberDto {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-	
+
 	
 }

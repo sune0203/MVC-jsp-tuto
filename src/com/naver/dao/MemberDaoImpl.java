@@ -6,10 +6,15 @@ import java.util.ArrayList;
 
 import com.naver.dao.MemberDao;
 import com.naver.db.DB;
+import com.naver.dto.HugiDto;
+import com.naver.dto.HugiPrintDto;
 import com.naver.dto.MemberDto;
+import com.naver.dto.MovieDto;
 
 public class MemberDaoImpl implements MemberDao{
-
+	
+	
+	//유저 정보===================================================
 	@Override
 	public void insert(MemberDto dto) {
 		// 디비 연결
@@ -21,7 +26,7 @@ public class MemberDaoImpl implements MemberDao{
 
 		try {
 			conn = DB.conn(); 
-			String sql = "INSERT INTO member (email, pw, name, tel) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO user_tb (email, pw, name, tel) VALUES (?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getEmail());
@@ -61,7 +66,7 @@ public class MemberDaoImpl implements MemberDao{
 		try {
 			conn = DB.conn();
 //			String sql = "SELECT * FROM user WHERE  id= '" + id + "'";
-			String sql = "SELECT * FROM member WHERE  email = ?";
+			String sql = "SELECT * FROM user_tb WHERE  email = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -90,87 +95,7 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return isEmail;
 	}
-
-	@Override
-	public ArrayList<MemberDto> select() {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		// 전달 변수(dto 담을 그릇)
-		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
-		try {
-			conn = DB.conn();
-			String sql = "SELECT * FROM member";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				MemberDto dto = new MemberDto();
-				dto.setEmail(rs.getString("email"));
-				dto.setName(rs.getString("name"));
-//				dto.setJumsu(rs.getInt("jumsu"));
-				list.add(dto);
-			}
-
-		} catch (Exception e) {
-			System.out.println("에러: " + e);
-		} finally {
-			try {
-				if( rs != null && !rs.isClosed()){
-                    rs.close();
-                }
-				if( pstmt != null && !pstmt.isClosed()){
-                    pstmt.close();
-                }
-				if (conn != null && !conn.isClosed()) {
-					conn.close();
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-
-	@Override
-	public void update(MemberDto dto) {
-
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//
-//		try {
-//			conn = DB.conn(); 
-//			String sql = "UPDATE user SET jumsu=? WHERE  id=?";
-//			pstmt = conn.prepareStatement(sql);
-//			
-////			pstmt.setInt(1, dto.getJumsu());
-//			pstmt.setString(2, dto.getId());
-//			
-//			int count = pstmt.executeUpdate();
-//			if (count == 0) {
-//				System.out.println("데이터 입력 실패");
-//			} else {
-//				System.out.println("데이터 입력 성공");
-//			}
-//
-//		} catch (Exception e) {
-//			System.out.println("에러: " + e);
-//		} finally {
-//			try {
-//				if (conn != null && !conn.isClosed()) {
-//					conn.close();
-//				}
-//				if( pstmt != null && !pstmt.isClosed()){
-//                    pstmt.close();
-//                }
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-		
-	}
-
+	
 	@Override
 	public MemberDto select(String email, String pw) {
 		Connection conn = null;
@@ -181,7 +106,7 @@ public class MemberDaoImpl implements MemberDao{
 		MemberDto dto = null;
 		try {
 			conn = DB.conn();
-			String sql = "SELECT * FROM member WHERE  email = ? AND pw = ?";
+			String sql = "SELECT * FROM user_tb WHERE  email = ? AND pw = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			pstmt.setString(2, pw);
@@ -218,5 +143,99 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return dto;
 	}
+
+
+
+	@Override
+	public ArrayList<MemberDto> select() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		// 전달 변수(dto 담을 그릇)
+		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
+		try {
+			conn = DB.conn();
+			String sql = "SELECT * FROM user_tb";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MemberDto dto = new MemberDto();
+				dto.setEmail(rs.getString("email"));
+				dto.setName(rs.getString("name"));
+				dto.setNum(rs.getInt("num"));
+				dto.setPw(rs.getString("pw"));
+				dto.setTel(rs.getString("tel"));
+//				dto.setJumsu(rs.getInt("jumsu"));
+				list.add(dto);
+			}
+
+		} catch (Exception e) {
+			System.out.println("에러: " + e);
+		} finally {
+			try {
+				if( rs != null && !rs.isClosed()){
+                    rs.close();
+                }
+				if( pstmt != null && !pstmt.isClosed()){
+                    pstmt.close();
+                }
+				if (conn != null && !conn.isClosed()) {
+					conn.close();
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+//	@Override
+//	public void update(MemberDto dto) {
+
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//			conn = DB.conn(); 
+//			String sql = "UPDATE user SET jumsu=? WHERE  id=?";
+//			pstmt = conn.prepareStatement(sql);
+//			
+////			pstmt.setInt(1, dto.getJumsu());
+//			pstmt.setString(2, dto.getId());
+//			
+//			int count = pstmt.executeUpdate();
+//			if (count == 0) {
+//				System.out.println("데이터 입력 실패");
+//			} else {
+//				System.out.println("데이터 입력 성공");
+//			}
+//
+//		} catch (Exception e) {
+//			System.out.println("에러: " + e);
+//		} finally {
+//			try {
+//				if (conn != null && !conn.isClosed()) {
+//					conn.close();
+//				}
+//				if( pstmt != null && !pstmt.isClosed()){
+//                    pstmt.close();
+//                }
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		
+//	}
+
+	
+
+
+
+
+
+
+
 
 }

@@ -37,7 +37,7 @@ public class SearchServlet extends HttpServlet {
 		String search = request.getParameter("search");
 		System.out.println(">>>>>>>>>>>>>>>>>>>>> " + search);
 		// 네이버API를 활용해서 정보를 가져온다(json 형태로 넘어옴)
-		String jsonData = NvSearchApi.search(search);
+		String jsonData = NvSearchApi.search(search+"날씨");
 		// view 쪽에 정보를 출력 하면 끝!!
 		System.out.println(jsonData);
 		response.setContentType("application/json; charset=UTF-8");
